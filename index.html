@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <title>Search box</title>
+</head>
+<body>
+    
+    <script>
+        var pay = [];
+        let money = 111;
+        var main = 300;
+
+        if ( money > main){
+            let b = money % main;
+            var c = Math.floor(money / main);
+            
+            if (b == 0 ){
+                console.log(b);
+            }else{
+                pay.unshift(b);
+            }
+
+            for ( let i = 0; i < c; i++){
+                pay.unshift(main);
+            }
+        }else{
+            pay.unshift(money);
+        }
+        console.log(pay);
+
+    </script>
+</body>
+</html>
