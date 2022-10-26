@@ -1,13 +1,12 @@
 // bài 1
-var User = {};
-User.name = "Hoang";
-User.surname = "Viet";
-User.name = "Bui";
-delete User.name;
-
+const userInfo = {};
+userInfo.name = "Hoang";
+userInfo.surname = "Viet";
+userInfo.name = "Bui";
+delete userInfo.name;
 
 // bài 2
-function Tong(obj) {
+function getSum(obj) {
     let sum = 0;
     for (let key in obj) {
         sum += obj[key];
@@ -15,12 +14,12 @@ function Tong(obj) {
     console.log(sum);
 }
 
-var salaries = {
+const salaries = {
     bui: 1200,
     viet: 1300,
     hoang: 1350,
 };
-Tong(salaries);
+getSum(salaries);
 
 // bài 3
 function multiplyNumeric(obj) {
@@ -31,7 +30,7 @@ function multiplyNumeric(obj) {
     }
     console.log(obj);
 }
-var menu = {
+const menu = {
     width: 200,
     height: 300,
     name: "Bui Viet Hoang",
@@ -39,14 +38,14 @@ var menu = {
 multiplyNumeric(menu);
 
 // bài 4
-var style = ["Jazz", "Blues"];
+let style = ["Jazz", "Blues"];
 
-function change() {
+function changeStyle() {
     style.push("Rock-n-Roll");
 
-    var lenght = style.length;
+    let lenght = style.length;
     if (lenght % 2 !== 0) {
-        var mid_index = Math.ceil(lenght / 2);
+        let mid_index = Math.ceil(lenght / 2);
         style[mid_index - 1] = "Classic";
     }
 
@@ -56,10 +55,10 @@ function change() {
 
     console.log(style);
 }
-change();
+changeStyle();
 
 // bài 5
-function camelize(str) {
+function camelizeName(str) {
     return str
         .split("-")
         .map((word, index) =>
@@ -68,29 +67,27 @@ function camelize(str) {
         .join("");
 }
 
-console.log(camelize("list-style-image"));
+console.log(camelizeName("list-style-image"));
 
-// bài 6
+// bài 6 (update a > b) 
 function filterRangeInPlace(arr, a, b) {
-    return arr.filter((item) => a <= item && item <= b);
+    return arr.filter((item) =>
+        a > b ? a >= item && item >= b : a <= item && item <= b
+    );
 }
 
-var arr = [1, 2, 3, 4, 5];
-console.log(filterRangeInPlace(arr, 2, 4));
+const arr = [1, 2, 3, 4, 5];
+console.log(filterRangeInPlace(arr, 4, 2));
 
-// bài 7
-function to_name_arr(obj) {
-    var arr_name = obj
-        .filter((item) => {
-            return item.name;
-        })
-        .map((item) => {
-            return item.name;
-        });
-    console.log(arr_name);
+// bài 7  ( change filter() + map() to reduce() )
+function getNameArr(obj) {
+    let arrName = obj.reduce((output, item) => {
+        return item.name ? [...output, item.name] : output;
+    }, []);
+    console.log(arrName);
 }
 
-var initArray = [
+const userName = [
     { name: "Bui", age: 25 },
     { name: "Viet", age: 26 },
     { name: "Hoang", age: 27 },
@@ -98,55 +95,55 @@ var initArray = [
     { age: 20 },
     { name: "Hoang2", age: 18 },
 ];
-
-to_name_arr(initArray);
+getNameArr(userName);
 
 // bài 8
 function getAverageAge(arr) {
-    var age_list = arr
-      .filter((item) => {
-        return item.age;
-      })
-      .map((item) => {
-        return item.age;
-      });
-    var arr_lenght = Object.keys(age_list).length;
-  
-    var average_age = age_list.reduce((prev, item) => prev + item) / arr_lenght;
-    console.log(average_age);
-  }
-  
-  var initArray = [
+    let ageList = arr.reduce((output, item) => {
+        return item.age ? [...output, item.age] : output;
+    }, []);
+    let averageAge =
+        ageList.reduce((prev, item) => prev + item) / ageList.length;
+    console.log(averageAge);
+}
+
+const initArray = [
     { name: "Bui", age: 25 },
     { name: "Viet", age: 26 },
     { name: "Hoang", age: 27 },
     { name: "Bui2" },
     { age: 20 },
-    { name: "Hoang2", age: 18 }
-  ];
-  getAverageAge(initArray);
-  
+    { name: "Hoang2", age: 18 },
+];
+getAverageAge(initArray);
 
-// bài 9
-let flattened = [
+// bài 9 ( change flat() to reduce() )
+function flatArr(arr) {
+    const flatten = arr.reduce((output, item) => {
+        return output.concat(item);
+    });
+    console.log(flatten);
+}
+
+const inputArr = [
     [1, 2],
     [3, 4],
     [5, 6],
 ];
-console.log(flattened.flat());
+flatArr(inputArr);
 
 // bài 10
-function print_number() {
-    var start_num = 1;
-    var number = document.getElementById("number").value;
+function printNumber() {
+    let startNum = 1;
+    let number = document.getElementById("number").value;
     number = parseInt(number);
-    var html = "";
+    let html = "";
 
     if (isNaN(number)) {
         document.getElementById("result").innerHTML =
-            start_num + "<br/>" + "Vui lòng nhập giá trị số vào ô input";
+            startNum + "<br/>" + "Vui lòng nhập giá trị số vào ô input";
     } else {
-        for (var i = start_num; i <= number; i++) {
+        for (let i = startNum; i <= number; i++) {
             html += i + " <br/>";
         }
         document.getElementById("result").innerHTML = html;
