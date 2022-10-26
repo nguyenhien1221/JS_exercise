@@ -1,7 +1,7 @@
 // bài 1
-const chunk = (arr, size) => {
-    const result = arr.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / size);
+const chunkArr = (arr, size) => {
+    let result = arr.reduce((resultArray, item, index) => {
+        let chunkIndex = Math.floor(index / size);
 
         if (!resultArray[chunkIndex]) {
             resultArray[chunkIndex] = [];
@@ -13,23 +13,23 @@ const chunk = (arr, size) => {
 };
 
 const input = [1, 2, 3, 4, 5];
-chunk(input, 2);
+chunkArr(input, 2);
 
 // bài 3
-const Uniq = (arr) => {
-    const unique_arr = arr.reduce((unique, item) => {
+const getUniq = (arr) => {
+    let uniqueArr = arr.reduce((unique, item) => {
         return unique.includes(item) ? unique : [...unique, item];
     }, []);
 
-    console.log(unique_arr);
+    console.log(uniqueArr);
 };
 
 const Array = [2, 1, 0, 3, 2, 1, 2];
-Uniq(Array);
+getUniq(Array);
 
 // bài 4
 const Count = (arr) => {
-    var count = arr.reduce((output, item) => {
+    let count = arr.reduce((output, item) => {
         output[item] = output[item] + 1 || 1;
         return output;
     }, {});
@@ -40,27 +40,27 @@ const input_arr = [0, 1, 1, 2, 2, 2];
 Count(input_arr);
 
 // bài 5
-const Min = (arr) => {
-    const min = arr.reduce((min, item) => {
+const getMin = (arr) => {
+    let min = arr.reduce((min, item) => {
         return min < item ? min : item;
     });
     console.log("số nhỏ nhất là: " + min);
 };
 
-const Max = (arr) => {
-    const max = arr.reduce((max, item) => {
+const getMax = (arr) => {
+    let max = arr.reduce((max, item) => {
         return max > item ? max : item;
     });
     console.log("số lớn nhất là: " + max);
 };
 
 const arr = [12, 45, 21, 65, 38, 76, 108, 43];
-Min(arr);
-Max(arr);
+getMin(arr);
+getMax(arr);
 
 // bài 6
-const Group = (arr, key) => {
-    const group = arr.reduce((output, item) => {
+const getGroupBy = (arr, key) => {
+    let group = arr.reduce((output, item) => {
         let group_key = item[key];
 
         if (!output[group_key]) {
@@ -81,31 +81,15 @@ const place_arr = [
     { area: "FS", name: "BBB", age: 21 },
     { area: "SZ", name: "CCC", age: 19 },
 ];
-Group(place_arr, "area");
-
+getGroupBy(place_arr, "area");
 
 // bài 2
-const Difference = (a1, a2) => {
-    const merge = [...a1, ...a2];
-    var result = [];
-    
-    const flat = merge.reduce((output, item) => {
-        return output.concat(item);
+const getDifference = (a1, a2) => {
+    let result = a1.reduce((output, item) => {
+        return a2.includes(item) ? output : [...output, item];
     }, []);
-
-    const count = flat.reduce((output, item) => {
-        output[item] = output[item] + 1 || 1;
-        return output;
-    }, {});
-
-    for (let key in count) {
-        if (count[key] === 1) {
-            result.push(key);
-        }
-    }
     console.log(result);
 };
-
-const input1 = [1, 2, 3, 4, 5];
-const input2 = [2, 3, 6];
-Difference(input1, input2);
+const inputArr1 = [1, 2, 3, 4, 5];
+const inputArr2 = [2, 3, 6];
+getDifference(inputArr1, inputArr2);
