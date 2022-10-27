@@ -69,15 +69,16 @@ function camelizeName(str) {
 
 console.log(camelizeName("list-style-image"));
 
-// bài 6 (update a > b) 
+// bài 6 (update a > b)
 function filterRangeInPlace(arr, a, b) {
-    return arr.filter((item) =>
-        a > b ? a >= item && item >= b : a <= item && item <= b
-    );
+    // switch a vs b
+    let c = a > b ? a : b;
+    a = a < b ? a : b;
+    return arr.filter((item) => a <= item && item <= c);
 }
 
 const arr = [1, 2, 3, 4, 5];
-console.log(filterRangeInPlace(arr, 4, 2));
+console.log(filterRangeInPlace(arr, 4, 1));
 
 // bài 7  ( change filter() + map() to reduce() )
 function getNameArr(obj) {
@@ -119,18 +120,12 @@ getAverageAge(initArray);
 
 // bài 9 ( change flat() to reduce() )
 function flatArr(arr) {
-    const flatten = arr.reduce((output, item) => {
-        return output.concat(item);
-    });
-    console.log(flatten);
+    return arr.reduce((output, item) =>
+            output.concat(Array.isArray(item) ? flatArr(item) : item),[]);
 }
 
-const inputArr = [
-    [1, 2],
-    [3, 4],
-    [5, 6],
-];
-flatArr(inputArr);
+const inputArr = [[[1, 2]], [[[3, 4]], [5, 6]]];
+console.log(flatArr(inputArr));
 
 // bài 10
 function printNumber() {
